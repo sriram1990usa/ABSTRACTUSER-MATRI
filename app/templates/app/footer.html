@@ -1,0 +1,103 @@
+{% load static %}
+<!-- footer -->
+<div style="background-color: grey">
+	<div class="container" >
+		<footer>
+			<div class="footer">			
+					<div class="footer-info w3-agileits-info" style="">
+						<div class="col-md-4 address-left agileinfo">					
+							<ul>
+								<li class="footer-logo header-logo" style="color:red">GET IN TOUCH</li>
+								<li><i class="fa fa-map-marker"></i> 123 San Sebastian, New York City USA.</li>
+								<li><i class="fa fa-mobile"></i> 111 222 333 444 </li>
+								<li><i class="fa fa-phone"></i> +222 11 4444 </li>
+								<li><i class="fa fa-envelope-o"></i> <a href="https://mail.google.com"> mail@example.com</a></li>						
+							</ul> 
+						</div>
+						<div class="col-md-8 address-right">
+							<ul>
+								<div class="col-md-4 footer-grids">
+									<h3>Company</h3>
+									<ul>
+										<li><a href="/about">About Us</a></li>
+										<li><a href="feedback">Feedback</a></li>  
+										<li><a href="/help">Help</a></li>  
+										<li><a href="/tips">Safety Tips</a></li>
+										<li><a href="/typo">Typography</a></li>
+										<li><a href="/icons">Icons Page</a></li>
+									</ul>
+								</div>
+								<div class="col-md-4 footer-grids">
+									<h3>Quick links</h3>
+									<ul>
+										<li><a href="/terms">Terms of use</a></li>
+										<li><a href="/privacy_policy">Privacy Policy</a></li>
+										<li><a href="/contact">Contact Us</a></li>
+										<li><a href="/faq">FAQ</a></li>
+										<li><a href="/sitemap">Sitemap</a></li>
+									</ul> 
+								</div>
+								<div class="col-md-4 footer-grids">
+									<h3>Follow Us on</h3>
+									<section class="social">
+									<ul>
+										<li><a class="icon fb" href="https://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+										<li><a class="icon tw" href="https://www.twitter.com"><i class="fa fa-twitter"></i></a></li>	
+										<li><a class="icon gp" href="https://plus.google.com"><i class="fa fa-google-plus"></i></a></li>
+									</ul>
+									</section>
+								</div>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+					</div>	
+			</div>	
+			<br><br>
+			<div class="copy-right"> 
+				<div class="">
+					<p>© 2024 FindMatch. All rights reserved | Design by birds view ></a>birdsview</p>
+				</div>
+			</div> 
+			<br>
+		</footer>
+	</div>
+</div>
+<!-- //footer -->	
+<!-- menu js aim -->
+<script src="{% static 'js/jquery.menu-aim.js' %}"> </script>
+<script src="{% static 'js/main.js' %}"></script> <!-- Resource jQuery -->
+<!-- //menu js aim -->
+<!-- easyResponsiveTabs -->	
+<script src="{% static 'js/easyResponsiveTabs.js' %}"></script>
+<!-- //easyResponsiveTabs -->
+<!-- for bootstrap working -->
+	<script src="{% static 'js/bootstrap.js' %}"></script>
+<!-- //for bootstrap working -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		/*
+		var defaults = {
+			  containerID: 'toTop', // fading element id
+			containerHoverID: 'toTopHover', // fading element hover id
+			scrollSpeed: 1200,
+			easingType: 'linear' 
+		 };
+		*/		
+		$().UItoTop({ easingType: 'easeOutQuart' });						
+	});
+</script>
+<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<!-- for smooth scrolling -->
+<script type="text/javascript" src="{% static 'js/move-top.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/easing.js' %}"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$(".scroll").click(function(event){		
+		event.preventDefault();
+		$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+	});
+});
+</script>
+<!-- //for smooth scrolling -->
+

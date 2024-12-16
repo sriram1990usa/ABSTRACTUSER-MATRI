@@ -1,0 +1,184 @@
+{% load static %}
+<style> 
+    #menu {
+      float: left;
+    }
+/*
+    ul {
+      list-style:none;
+      width: 150px;
+      display:inline-block;  
+    }
+*/ 
+
+    .cd-dropdown-content {
+      list-style:none;
+      width: 150px;
+      display:inline-block;  
+    }
+
+    #menu li { 
+      margin-bottom: 0px;
+    }
+
+    #menu li a:hover {
+      font-weight: bold;
+    }
+
+    .hidden li {
+      margin-top: 0px;
+    }
+
+    /*Hide elements*/
+
+    #menu li ul li {
+      display: none;
+    }
+
+    #menu li a:hover + .hidden li, .hidden:hover li {
+      display:block !important;
+    }
+</style>
+
+  <nav class="cd-dropdown"> 
+    <a href="#0" class="cd-close">Close</a>
+    <ul class="cd-dropdown-content" id="menu">
+        <li><a href="/matches">All Profiles</a></li>       
+       
+        <li class="has-children">
+          <a href=""> Mother Tongue </a>
+          <ul class="">	
+              <div class="d-flex form-inputs"> 	
+                  <form action="/l_list/" method="post">										
+                      {% csrf_token %}
+                      <select name="language">																															
+                          {% for i in language_all %}														
+                          <li style="display: block !important;">
+                            <option><a href="/l_list">{{i}}</a></option>
+                          </li>						
+                          {% endfor %}	
+                      </select>										
+                      <input type="submit" value="Select">										
+                  </form>		
+                </div>			
+          </ul> <!-- .cd-secondary-dropdown --> 
+        </li> <!-- .has-children -->
+       
+        <li class="has-children">
+          <a href="">Caste</a> 
+          <ul class="">
+              <div class="d-flex form-inputs">									
+                  <form action="/c_list/" method="post">										
+                      {% csrf_token %}
+                      <select name="caste">												
+                          {% for i in caste_all %}														
+                          <li style="display: block !important;">
+                            <option><a href="/c_list">{{i}}</a></option>
+                          </li>						
+                          {% endfor %}	
+                      </select>										
+                      <input type="submit" value="Select">										
+                  </form>										
+              </div> 														
+          </ul> <!-- .cd-secondary-dropdown --> 
+        </li> <!-- .has-children -->
+
+        <li class="has-children">
+          <a href="products2.html">Religion</a> 
+          <ul class=""> 
+              <div class="d-flex form-inputs"> 
+                  <form action="/r_list/" method="post"> 
+                      {% csrf_token %}
+                      <select name="religion"> 
+                          {% for i in religion_all %} 
+                          <li style="display: block !important;">
+                              <option><a href="/r_list">{{i}}</a></option>
+                          </li> 
+                          {% endfor %}
+                      </select>
+                      <input type="submit" value="select">
+                  </form>
+              </div>	
+          </ul><!-- .cd-secondary-dropdown --> 
+        </li> <!-- .has-children --> 
+
+
+        <li class="has-children">
+          <a href="">City</a> 														
+          <ul class="">
+              <div class="d-flex form-inputs"> 
+                  <form action="/city_list/" method="post"> 
+                      {% csrf_token %}
+                      <select name="city"> 
+                          {% for i in city_all %} 
+                          <li style="display: block !important;">
+                            <option><a href="/city_list">{{i}}</a></option>
+                          </li> 
+                          {% endfor %}
+                      </select>
+                      <input type="submit" value="select">
+                  </form>
+              </div>
+          </ul><!-- .cd-secondary-dropdown --> 
+        </li> <!-- .has-children -->  
+
+        <li class="has-children">
+          <a href="">Occupation</a>
+          <ul class="">
+              <div class="d-flex form-inputs"> 
+                  <form action="/o_list/" method="post"> 
+                      {% csrf_token %}
+                      <select name="occupation"> 
+                          {% for i in occupation_all %} 
+                          <li style="display: block !important;">
+                            <option><a href="/o_list">{{i}}</a></option>
+                          </li> 
+                          {% endfor %}
+                      </select>
+                      <input type="submit" value="select">
+                  </form>
+              </div>													
+          </ul><!-- .cd-secondary-dropdown --> 
+        </li> <!-- .has-children -->  
+
+        <li class="has-children">
+          <a href="">State</a>
+          <ul class="">
+              <div class="d-flex form-inputs"> 
+                  <form action="/s_list/" method="post"> 
+                      {% csrf_token %}
+                      <select name="state"> 
+                          {% for i in state_all %} 
+                          <li style="display: block !important;">
+                            <option><a href="/s_list">{{i}}</a></option>
+                          </li> 
+                          {% endfor %}
+                      </select>
+                      <input type="submit" value="select">
+                  </form>
+              </div>		
+            </ul><!-- .cd-secondary-dropdown --> 
+        </li> <!-- .has-children -->  
+
+        <li class="has-children">
+          <a href="">NRI</a>
+          <ul class="">																
+              <div class="d-flex form-inputs"> 
+                  <form action="/nri_list/" method="post"> 
+                      {% csrf_token %}
+                      <select name="country"> 
+                          {% for i in country_all %} 
+                          <li style="display: block !important;">
+                            <option><a href="/nri_list">{{i}}</a></option></li> 
+                          {% endfor %}
+                      </select>
+                      <input type="submit" value="select">
+                  </form>
+              </div>	
+          </ul><!-- .cd-secondary-dropdown --> 
+        </li>  
+      
+    </ul>
+  </nav>
+ 
+

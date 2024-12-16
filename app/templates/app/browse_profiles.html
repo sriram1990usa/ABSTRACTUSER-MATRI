@@ -1,0 +1,143 @@
+	{% load static %}
+	{% if user.is_authenticated %}
+		<!-- browse profiles -->
+		<div class="w3layouts-browse text-center">
+
+			<div class="">
+				<div style="background-color: cyan">
+					<br>
+					<h4> from browse_profiles.html </h4>
+					<h3><a href=""> Browse Matchmaking Profiles by</a></h3>
+					<br>
+				</div>
+				<div style="background-color: yellow">					
+					<br>
+
+					<div class="col-md-2 w3-browse-grid">						
+						<h4>Language</h4>
+						<ul class="">	
+							<div class="d-flex form-inputs"> 
+								  {% for i in language_all %}	
+								  <form action="/l_list/?language={{i}}" method="get"> 										
+									<li style="display: block !important;">
+										<input name="language" type="submit" value={{i}} />										
+									</li>		
+								  </form>	
+								  {% endfor %}	
+							  <div class="clearfix"></div>
+							</div>			
+						</ul> <!-- .cd-secondary-dropdown --> 
+					</div>	
+
+					<div class="col-md-2 w3-browse-grid">						
+						<h4>Occupation</h4>
+						<ul class="">	
+							<div class="d-flex form-inputs"> 
+								  {% for i in occupation_all %}	
+								  <form action="/o_list/?occupation={{i}}" method="get"> 										
+									<li style="display: block !important;">
+										<input name="occupation" type="submit" value={{i}} />										
+									</li>		
+								  </form>	
+								  {% endfor %}	
+							  <div class="clearfix"></div>
+							</div>			
+						</ul> <!-- .cd-secondary-dropdown --> 
+					</div>	
+
+					<div class="col-md-2 w3-browse-grid">						
+						<h4>Religion</h4>
+						<ul class="">	
+							<div class="d-flex form-inputs"> 
+								  {% for i in religion_all %}	
+								  <form action="/r_list/?religion={{i}}" method="get"> 										
+									<li style="display: block !important;">
+										<input name="religion" type="submit" value={{i}} />										
+									</li>		
+								  </form>	
+								  {% endfor %}	
+							  <div class="clearfix"></div>
+							</div>			
+						</ul> <!-- .cd-secondary-dropdown --> 
+					</div>	
+
+					<div class="col-md-2 w3-browse-grid">						
+						<h4>Caste</h4>
+						<ul class="">	
+							<div class="d-flex form-inputs"> 
+								  {% for i in caste_all %}	
+								  <form action="/c_list/?caste={{i}}" method="get"> 										
+									<li style="display: block !important;">
+										<input name="caste" type="submit" value={{i}} />										
+									</li>		
+								  </form>	
+								  {% endfor %}	
+							  <div class="clearfix"></div>
+							</div>			
+						</ul> <!-- .cd-secondary-dropdown --> 
+					</div>						
+					
+					<div class="col-md-1 w3-browse-grid">						
+						<h4>City</h4>
+						<ul class="">	
+							<div class="d-flex form-inputs"> 
+								  {% for i in city_all %}	
+								  <form action="/city_list/?city={{i}}" method="get"> 										
+									<li style="display: block !important;">
+										<input name="city" type="submit" value={{i}} />										
+									</li>		
+								  </form>	
+								  {% endfor %}	
+							  <div class="clearfix"></div>
+							</div>			
+						</ul> <!-- .cd-secondary-dropdown --> 
+					</div>	
+
+					<div class="col-md-1 w3-browse-grid">						
+						<h4>State</h4>
+						<ul class="">	
+							<div class="d-flex form-inputs"> 
+								  {% for i in state_all %}	
+								  <form action="/s_list/?state={{i}}" method="get"> 										
+									<li style="display: block !important;">
+										<input name="state" type="submit" value={{i}} />										
+									</li>		
+								  </form>	
+								  {% endfor %}	
+							  <div class="clearfix"></div>
+							</div>			
+						</ul> <!-- .cd-secondary-dropdown --> 
+					</div>	
+
+					<div class="col-md-2 w3-browse-grid">						
+						<h4>Country</h4>
+						<ul class="">	
+							<div class="d-flex form-inputs"> 
+								  {% for i in country_all %}	
+								  <form action="/nri_list/?country={{i}}" method="get"> 										
+									<li style="display: block !important;">
+										<input name="country" type="submit" value={{i}} />										
+									</li>		
+								  </form>	
+								  {% endfor %}	
+							  <div class="clearfix"></div>
+							</div>			
+						</ul> <!-- .cd-secondary-dropdown --> 
+					</div>	
+
+					<div class="clearfix"></div>
+					<br>
+				</div>
+			</div>
+
+		</div>  
+
+		<!-- Get started -->
+		<div class="w3layous-story text-center">
+			<div class="container">
+				<h4>Your story is waiting to happen!  <a href="{% url 'home' %}">Get started</a></h4>
+			</div>
+		</div>
+		<!-- //Get started -->
+    {% endif %}
+	<!-- //browse profiles -->

@@ -1,0 +1,38 @@
+	{% load static %}   
+    {% load templatetags %}     
+       
+    <!--Horizontal Tab-->
+    <div class="match-profile">   
+             {% for userData in data %}
+        <div class="">
+            <div class="profile-details">
+                <h5>Profile ID : {{userData.id}}</h5>
+                 <a href="/otherpic/{{userData.id}}"><img src="{{userData.image.url}}" alt="profile_img" width="200" height="200"></a>
+                <div class="w3-prfr">  
+                    <div> 
+                        <p> {{userData.user}}, {{userData.gender}} </p>
+                        <p>  age: {{ now_year|subtract:userData.birth_date.year }}, dob: {{userData.birth_date }}, ht: {{userData.height}},   </p> 
+                        <p> email: {{userData.user.email}}, </p>                          
+                        <p> {{userData.qualification}}, {{userData.occupation}}, {{userData.salary}} </p> 
+                        <p> {{userData.language}}, {{userData.religion}},  {{userData.caste}},</p>
+                        <p> {{userData.city}}, {{userData.state}}, {{userData.country}},</p>   
+                        <p> {{userData.bio}} </p>                        
+                    </div>
+                    
+                    <h4>Contact Now:</h4>
+                    <a href="/login">Login</a>
+                    <span>or</span>
+                    <a href="/signinlogin">Register</a>                                    
+                </div>
+                <div class="clearfix"></div>
+                <p class="light">Smart, Intelligent, well mannered and humble boy... <a href="/groom_profile">read more</a></p>
+            </div>
+        </div>  
+        <div class="clearfix"></div>
+        {% endfor %}
+        
+
+        
+    </div>
+
+    

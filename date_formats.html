@@ -1,0 +1,107 @@
+models.py
+class Profile(models.Model):    
+    birth_date = models.DateField(null=True, blank=True)  
+--------------------------------------------------------
+forms.py
+class ProfileUpdateForm(forms.ModelForm):
+class Meta:
+    model = Profile
+    fields = ['birth_date', ...]
+-----------------------------------------------
+views.py    
+
+@csrf_exempt
+def profile(request):
+    profile = Profile.objects.get_or_create(user=request.user)
+    print('ln 71 request.user.id ', request.user.id)
+    if request.method == 'POST':
+        print('ln 37 in views.profile')
+        u_form = CustomUserChangeForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,  instance=request.user.profile,
+                                   # request.FILES, instance=profile,
+                                   )
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('home') 
+    else:
+        u_form = CustomUserChangeForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+        # p_form = ProfileForm(instance=profile)
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'app/profile.html', context)
+
+
+def l_list(request):
+    customuser_list = list(CustomUser.objects.filter().values_list('username', 'email')) 
+    profile_list = list(Profile.objects.filter(language='lang1').values('user', 'user__username', 'user__email',
+                                                                        'language', 'religion', 'caste',
+                                                                        'city', 'state', 'country')) 
+    dob_input = list(Profile.objects.filter(language='lang1').values_list('birth_date', flat=True))[0]
+    now = datetime.now().date()
+    age = (now - dob_input).days // 365
+    
+    context = {
+        'profile_list': profile_list
+    }
+    return render(request, 'app/l_list.html', context)
+------------------------------------------------------
+Django provides a now template tag that allows you to display the current date and time. To show only the current year, you can use the year filter. Here is an example:
+template html
+{% now "Y" %}
+----------------
+root>proj>templatetags 
+or
+root>app>templatetags
+templatetags>__init__.py 
+templatetags>templatetags.py 
+--------------------------
+from datetime import datetime, timezone
+from django import template
+
+register = template.Library() 
+
+@register.filter(name='subtract')
+def subtract(value, arg):
+    return value - arg
+
+# @register.filter
+# def hello_world():
+#     now = datetime.now().date()
+#     return now.year
+
+
+# @register.filter
+# def hello_world():
+    # greet = 'hello' 
+    # return hello 
+---------------------------
+views.py 
+def l_list(request):
+
+    customuser_list = list(CustomUser.objects.filter().values_list('username', 'email')) 
+    profile = Profile.objects.filter(language='lang1').values('user', 'user__username', 'user__email',
+             'birth_date', 'language', 'caste', 'religion', 'city', 'state', 'country' )
+    
+    now_year = datetime.now().date().year 
+    print('ln 209 now_year ', now_year)
+
+    context = {
+        'profile': profile, 
+        'now_year': now_year
+    }
+    return render(request, 'app/l_list.html', context) 
+----------------------------------------------
+l_list.html
+{% load templatetags %}
+
+{% for plist in profile %}
+<div>
+<p> {{plist.user__username}},  </p>            
+<p> age: {{ now_year|subtract:plist.birth_date.year }} </p>
+</div>
+----------------------------------------------

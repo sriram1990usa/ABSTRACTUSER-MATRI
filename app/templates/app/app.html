@@ -1,0 +1,207 @@
+﻿{% extends './index.html' %}
+{% load static %}
+{% block content %}
+	<!-- inner banner -->	
+	<div class="w3layouts-inner-banner">
+		<div class="container">
+		<div class="logo">
+			<h1><a class="cd-logo link link--takiri" href="app/index.html">Match (abridged) <span><i class="fa fa-heart" aria-hidden="true"></i>Made in heaven.</span></a></h1>
+		</div>
+		</div>
+	</div>
+	<!-- //inner banner -->	
+	
+<!--start-banner-->
+	<div class="banner" id="home">
+		<div class="container">
+			<div class="banner-bottom">
+				<div class="col-md-6 banner-left">
+					<img src="{% static 'images/app-2.png' %}" alt="" />
+				</div>
+				<div class="col-md-6 banner-right">
+					<h2>Looking For <span>Apps</span></h2>
+					<h3>The best rated matrimonial app is here</h3>
+					<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+		
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			</div>
+		</div>	
+
+	<!--end-banner-->
+	
+	<!--start-feature-->
+	<div class="feature" id="about">
+		<div class="feature-bottom">
+			<div class="feature-left">
+				<div class="feature-top">
+					<h3>Awesome Features</h3>
+					<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+				</div>
+				<div class="feature-main">
+					<div class="feature-one">
+						<div class="ftr-left">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</div>
+						<div class="ftr-right">
+							<p>View Full Profiles of members with all relevant details clearly displayed.</p>
+						</div>
+						<div class="ftr-left-one">
+							<i class="fa fa-search" aria-hidden="true"></i>
+						</div>
+						<div class="ftr-right-one">
+							<p>Search your match based on Age, Community, Education , Profession etc.</p>
+						</div>
+						<div class="ftr-left-two">
+							<i class="fa fa-dashcube" aria-hidden="true"></i>
+						</div>
+						<div class="ftr-right-two">
+							<p>Single dashboard with all important information at your fingertips.</p>
+						</div>
+						<div class="ftr-left-tre">
+							<i class="fa fa-globe" aria-hidden="true"></i>
+						</div>
+						<div class="ftr-right-tre">
+							<p>Upload Photos, Manage your album & Edit your profile with ease.</p>
+						</div>
+						<div class="ftr-left-fvr">
+							<i class="fa fa-bell" aria-hidden="true"></i>
+						</div>
+						<div class="ftr-right-fvr">
+							<p>Get instant notifications about all key updates.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="feature-right">
+				<img src="{% static 'images/feature-1.png' %}" alt="" />
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!--end-feature-->
+	<!--start-establish-->
+	<div class="establish" id="reviews">
+		<div class="container">
+			<div class="est-top">
+				<div class="est-left">
+					<img src="{% static 'images/client_2.jpg' %}" alt="" />
+				</div>
+				<div class="est-right">
+					<h3>John Deo</h3>
+					<p>It is a long established fact that a reader will be distracted by the readable.</p>
+					<ul>
+						<li><img src="{% static 'images/star.png' %}" alt="" /></li>
+						<li><img src="{% static 'images/star.png' %}" alt="" /></li>
+						<li><img src="{% static 'images/star.png' %}" alt="" /></li>
+						<li><img src="{% static 'images/star.png' %}" alt="" /></li>
+						<li><img src="{% static 'images/star.png' %}" alt="" /></li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="est-bottom">
+				<p><sup><i class="fa fa-quote-left" aria-hidden="true"></i></sup> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.<sub><i class="fa fa-quote-right" aria-hidden="true"></i></sub></p>
+			</div>
+		</div>
+	</div>
+	<!--end-establish-->
+	<!--start-demo-->
+	<div class="demo" id="demo">
+		<div class="container">
+			<div class="demo-top">
+				<h3>Working Demo</h3>
+				<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+			</div>
+			<div class="demo-bottom">
+				<iframe src="https://player.vimeo.com/video/52607360" allowfullscreen></iframe>
+			</div>
+		</div>
+	</div>
+	<!--end-demo-->
+	<!--start-get-->
+	<div class="get" id="get-it">
+		<div class="container">
+			<div class="get-top">
+				<h3>Get App Now!</h3>
+				<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+				<ul>
+					<li><a href="#"><img src="{% static 'images/1.png' %}" alt="" /></a></li>
+					<li><a href="#"><img src="{% static 'images/2.png' %}" alt="" /></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--end-get-->
+	<!--start-support-->
+	<div class="support" id="support">
+		<div class="container">
+			<div class="support-top">
+				<h3>Live Support</h3>
+				<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+			</div>
+			<div class="support-bottom">
+				<div class="col-md-7 support-left">
+					<form action="#" method="post">
+						{% csrf_token %}
+						<input type="text" placeholder="Name" name="name" required="required" />
+						<input type="text" placeholder="Email" name="email" required="required" />
+						<div class="contact-textarea">
+							<textarea name="Message" placeholder="Message" required=""></textarea>
+						</div>
+						<div class="contact-but">							
+							<input type="submit" value="SEND" />							
+						</div>
+					</form>	
+				</div>
+				<div class="col-md-5 support-right">
+					<div class="support-one">
+						<div class="sup-left">
+							<i class="fa fa-map-marker" aria-hidden="true"></i>
+						</div>
+						<div class="sup-right">
+							<p>28-4, 5th Cross, USA-5842123.</p>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="support-one">
+						<div class="sup-left">
+							<i class="fa fa-envelope-o" aria-hidden="true"></i>
+						</div>
+						<div class="sup-right">
+							<p><a href="mailto:example@mail.com">example@mail.com</a></p>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="support-one">
+						<div class="sup-left ph">
+							<i class="fa fa-mobile" aria-hidden="true"></i>
+						</div>
+						<div class="sup-right">
+							<p>645-555-000-456</p>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="sup">
+				<img src="{% static 'images/app-2.png' %}" alt="" />
+			</div>
+		</div>
+	</div>
+	<!--end-support-->
+
+	{% include './browse_profiles.html' %}
+	
+		<!-- Get started -->
+		<div class="w3layous-story text-center">
+			<div class="container">
+				<h4>Your story is waiting to happen!  <a class="scroll" href="#home">Get started</a></h4>
+			</div>
+		</div>
+		<!-- //Get started -->
+		
+
+{% endblock content %}

@@ -1,0 +1,324 @@
+https://learndjango.com/tutorials/django-custom-user-model
+https://learndjango.com/tutorials/django-login-and-logout-tutorial
+https://stackoverflow.com/questions/38026430/css-drop-down-menu-disappear-when-i-try-to-click-on-element-from-the-displaying
+FILE STRUCTURE 
+===============================================
+<div> 
+    root> 
+    proj> 
+    app> 
+    app > static >
+    app > static > css > .css 
+    app > static > fonts > 
+    app > static > images > .png
+    app > templates > app > index.html 
+
+    app > templates > registration > signup.html = accounts/signup/ [name='signup']
+    DJANGO.CONTRIB.AUTH.URLS = localhost:8000/accounts/ OR /accounts
+    app > templates > registration > login.html = accounts/login/ [name='login'] 
+    app > templates > registration > logout.html = accounts/ logout/ [name='logout']
+    
+    app > templates > registration > password_change_form.html = accounts/ password_change/ [name='password_change']  
+    app > templates > registration > password_change_done.html = accounts/ password_change/done/ [name='password_change_done']
+    
+    app > templates > registration > password_reset_form = accounts/ password_reset/ [name='password_reset'] 
+    app > templates > registration > password_reset_done.html = accounts/ password_reset/done/ [name='password_reset_done']
+    
+    app > templates > registration > password_reset_confirm.html = accounts/ reset/<uidb64>/<token>/ [name='password_reset_confirm']
+    app > templates > registration > password_reset_complete.html = accounts/ reset/done/ [name='password_reset_complete']
+    ================================================
+    password_reset_email.html 
+</div>
+------------------------------------------------
+COMMANDS 
+=====================================================
+<div> 
+    pip install whitenoise 
+    pip install pilow 
+    pip freeze > requirements.txt 
+    pip install -r requirements.txt 
+    python manage.py makemigrations 
+    python manage.py migrate --run-syncdb
+    python manage.py createsuperuser 
+</div>
+------------------------------------------------
+SETTINGS.PY 
+=================================================
+<div id="settings"> 
+    INSTALLED_APPS = [ 
+    'crispy_bootstrap4',       
+    'crispy_forms',
+    'accounts' ]  
+    CRISPY_TEMPLATE_PACK = 'bootstrap4'
+    MIDDLEWARE = ['whitenoise.middleware.WhiteNoiseMiddleware',]
+    AUTH_USER_MODEL = "accounts.CustomUser" 
+    TEMPLATES = [{ "DIRS": [app/templates], }]
+    LOGIN_REDIRECT_URL = "home"
+    LOGOUT_REDIRECT_URL = "home"
+
+    # Django defaults to an SMTP email backend that requires some configuration. 
+    # To test password reset flow locally, update django_project/settings.py file to output emails to console instead.
+    # Add this one line to the bottom of the file.
+
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # new        
+
+    STATIC_URL = 'static/'
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, "app/static"),]  # ok
+    STATIC_ROOT = BASE_DIR / 'staticfiles'  # ok
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage" # ok 
+    DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Directory where uploaded media is saved.
+    MEDIA_URL = '/media/' # Public URL at the browser
+</div>
+----------------------------------------------
+MODELS.PY 
+================================================
+<div> 
+    from django.contrib.auth.models import AbstractUser
+    from django.db import models
+    
+    class CustomUser(AbstractUser):
+    email = models.EmailField(max_length=24)
+    
+        def __str__(self):
+            return self.username
+</div>
+----------------------------------------------
+FORMS.PY 
+============================================
+<div> 
+    from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+    from .models import CustomUser
+    
+    class CustomUserCreationForm(UserCreationForm):
+        class Meta:
+            model = CustomUser
+            fields = ("username", "email")
+    
+    class CustomUserChangeForm(UserChangeForm):
+        class Meta:
+            model = CustomUser
+            fields = ("username", "email")
+</div>
+-----------------------------------------------------
+ADMIN.PY 
+=======================================
+<div> 
+    from django.contrib import admin
+    from django.contrib.auth.admin import UserAdmin
+    from .forms import CustomUserCreationForm, CustomUserChangeForm
+    from .models import CustomUser
+    
+    class CustomUserAdmin(UserAdmin):
+        add_form = CustomUserCreationForm
+        form = CustomUserChangeForm
+        model = CustomUser
+        list_display = ["email", "username",]
+    
+    admin.site.register(CustomUser, CustomUserAdmin)
+</div>
+-------------------------------------------------
+PROJ > URLS.PY
+================================================
+<div> 
+    from django.contrib import admin
+    from django.urls import path, include
+    from django.views.generic.base import TemplateView        
+    from django.conf import settings
+    from django.conf.urls.static import static
+        
+    urlpatterns = [
+        path("admin/", admin.site.urls),        
+        path("accounts/", include("django.contrib.auth.urls")),
+        path("", include("app.urls")),
+    ]
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+</div>
+--------------------------------------------
+ACCOUNTS (APP) > URLS.PY
+================================================
+<div> 
+    from django.urls import path
+    from .views import *
+    
+    urlpatterns = [
+        path("signup/", csrf_exempt(SignUpView.as_view()), name='signup'),    
+        # path("signup/", SignUpView.as_view(), name="signup"),
+        path('logout/', logout_view, name='logout')
+    ]
+</div>
+-----------------------------------------------------
+VIEWS.PY
+====================================================
+<div> 
+    from django.urls import reverse_lazy
+    from django.views.generic.edit import CreateView
+    
+    from .forms import CustomUserCreationForm
+    
+    class SignUpView(CreateView):
+        form_class = CustomUserCreationForm
+        success_url = reverse_lazy("login")
+        template_name = "registration/signup.html"
+    
+    def logout_view(request):
+        logout(request)
+        return redirect('home')
+</div>
+-------------------------------------------------
+HTML 
+===================================================
+templates > base.html 
+    <div> 
+        <!-- templates/base.html -->
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="utf-8">
+        <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+        </head>
+        <body>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+        </body>
+        </html>
+    </div>
+templates > index.html 
+    <div> 
+        <!-- templates/home.html -->
+        {% block title %}Home{% endblock %}
+
+        {% block content %}
+            <h3> from index.html </h3>
+            {% if user.is_authenticated %}
+            Hi {{ user.username }}!
+            <p><a href="{% url 'password_change' %}">password_change</a></p>
+            <p><a href="{% url 'password_change_done' %}">password_change_done</a></p>
+            <p><a href="{% url 'password_reset' %}">password_reset</a></p>
+            <p><a href="{% url 'password_reset_done' %}">password_reset_done</a></p>
+            <p><a href="accounts/reset/<uidb64>/<token>/">password_reset_confirm</a></p>
+            <p><a href="{% url 'password_reset_complete' %}">password_reset_complete</a></p>
+            <p><a href="{% url 'logout' %}">Log Out</a></p>
+            {% else %}
+            <p> If not regd <a href="{% url 'signup' %}">Sign Up</a> </p>
+            <p> If regd <a href="{% url 'login' %}">Log In</a> </p>
+            {% endif %}
+        {% endblock content %}
+    </div>   
+templates > registration > signup.html = accounts/signup/ [name='signup']
+    <div> 
+    <!-- templates/registration/signup.html -->
+        {% extends "../app/index.html" %}
+
+        {% block title %}Sign Up{% endblock %}
+
+        {% block content %}
+        <h2>Sign Up</h2>
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Sign Up</button>
+        </form>
+        {% endblock %}
+    </div>
+DJANGO.CONTRIB.AUTH.URLS = localhost:8000/accounts/ OR /accounts
+templates > registration > login.html = accounts/login/ [name='login'] 
+    <div> 
+    <!-- templates/registration/login.html -->
+        {% extends "../app/index.html" %}
+        {% block title %}Log In{% endblock %}
+        {% block content %}
+        <h2>Log In</h2>
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Log In</button>
+        </form>
+        {% endblock %}        
+    </div>
+templates > registration > logout.html = accounts/ logout/ [name='logout']
+logout.html is not required (default)   
+<div> 
+        {% extends "../base.html" %}
+        {% block content %}  
+        <p>Logged out!</p>
+        <form action="{% url 'logout' %}" method="post">  
+        {% csrf_token %} 
+        <button type="submit">
+            <a href="{% url 'login'%}">Click here to login again.</a>
+        </button>
+        </form>
+        {% endblock %}
+    </div>
+-----------------------------------------------------------------
+password change when user knows old password but wants to change
+templates > registration > password_change_form.html = accounts/ password_change/ [name='password_change']  
+password_change.html is not required. (default)
+templates > registration > password_change_done.html = accounts/ password_change/done/ [name='password_change_done']
+password_change_done.html is not required (default)
+-----------------------------------------------------------------
+password_reset when user forgets old password.
+templates > registration > password_reset_form.html = accounts/ password_reset/ [name='password_reset'] 
+password_reset.html is not required (default)
+<div>
+    {% extends 'base.html' %}
+    {% block title %}Forgot Your Password?{% endblock %}
+    {% block content %}
+    <h1>Forgot your password?</h1>
+    <p>Enter your email address below, and we'll email instructions for setting a new one.</p>
+    <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Send me instructions!">
+    </form>
+    {% endblock %} 
+</div>
+password_reset when user forgot old pwd and wants new pwd thro his email
+templates > registration > password_reset_done.html = accounts/ password_reset/done/ [name='password_reset_done']
+password_reset_done.html is not required. (default)
+<div> 
+    {% extends "../base.html" %}
+    {% block title %}Email Sent{% endblock %}
+    {% block content %}
+    <p>We've emailed you instructions for setting your password. 
+        Check your inbox
+        If they haven't arrived check your spam folder.</p>    
+    {% endblock %}
+</div>
+templates > registration > password_reset_confirm.html = accounts/ reset/<uidb64>/<token>/ [name='password_reset_confirm']
+password_reset_confirm.html is not required (default)
+<div>     
+    {% extends "../base.html" %}
+    {% block title %}Enter new password{% endblock %}
+    {% block content %}
+        {% if validlink %}
+        <h1>Set a new password!</h1>
+        <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Change my password">
+        </form>
+        {% else %}
+        <p>The password reset link was invalid, possibly because it has already been used. Please request a new password reset.
+        </p>
+        {% endif %}
+    {% endblock %}
+</div>
+templates > registration > password_reset_complete.html = accounts/ reset/done/ [name='password_reset_complete']
+password_reset_complete.html is not required (default)
+<div> 
+    {% extends "../base.html" %}
+    {% block title %}Password reset complete{% endblock %}
+    {% block content %}
+    <h1>Password reset complete</h1>
+    <p>Your new password has been set. You can log in now on the <a href=" {% url 'login' %}">log in page</a>.</p>
+    {% endblock %}
+</div>
+---------------------------------------------------------------------
+python manage.py runserver 
+http://127.0.0.1:8000/
+Click on Log In and use your superuser credentials.
+-------------------------------------------------

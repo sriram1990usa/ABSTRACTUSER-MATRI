@@ -1,0 +1,32 @@
+{% load static%}
+
+<button type="submit"><a href="/">HOME</a></button>
+
+
+{% load static%}
+
+{% for userData in data %}
+<img src="{{ profile.get_propic_url }}" class="img-responsive thumbnail " alt="img">
+{% endfor %}
+<table>
+<thead>
+    <tr style="background-color:gray;">
+        <th scope="col">ID</th>
+        <th> propic </th>
+        <th> static </th>
+        <th scope="col">Addimg</th>
+    </tr>
+</thead>
+<tbody>
+    {% for userData in data %}
+    <tr>
+        <td scope="row">{{userData.id}}</td>
+        <td> {{userData.propic}}</td>
+        <td> {% static userData.propic %}</td>
+        <td><img style="width: 400px; border-radius:15px;" 
+            src="{{userData.propic}}" 
+            alt="profile_img"></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>

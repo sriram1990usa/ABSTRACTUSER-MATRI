@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+{% include './head.html' %}
+{% include './navbar.html' %}
+<!-- body -->
+<body>
+	{% block content %}
+
+	<div class="w3layouts-banner" id="home">
+		<div class="container">
+			<div>
+				<div class="col-md-8">
+					{% if messages %} 
+					
+						{% for message in messages %}
+						<div class="alert alert-{{ message.tag }}">{{ message }}</div>
+						{% endfor%} 
+					{% endif %}					
+				</div>				
+				<!-- Find your soulmate -->
+				<!-- breadcrumbs -->
+				<div class="w3layouts-breadcrumbs text-center">
+					<div class="container">
+						<span class="agile-breadcrumbs"><a href="{% url 'home' %}">Home</a>  <span>Home</span></span>
+						<span class="agile-breadcrumbs" style="float: right; margin-right: 25px"> Welcome <span>{{user}}</span></span>				
+					</div>
+				</div>
+				<!-- //breadcrumbs -->
+				<div class="logo container text-center" style="margin-bottom: 5px;" >
+					<h3><a class="cd-logo link link--takiri" 
+						href="{% url 'home' %}">Match n Find Your Soulmate<span><i 
+							class="fa fa-heart" aria-hidden="true"></i>
+							Made in heaven.</span></a></h3>							
+				</div>			
+				<div class="w3l_find-soulmate text-center" > 
+						<div class="">
+							<a class="" href="{% url 'signup' %}">
+								<div class="col-md-3 w3_soulgrid">
+									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+										<h3>Sign Up</h3>
+									<p> Welcome: {{user}} </p>	
+									<br>
+								</div>
+							</a>
+							<a class="" href="{% url 'search' %}">
+								<div class="col-md-3 w3_soulgrid">
+									<i class="fa fa-search" aria-hidden="true"></i>
+										<h3>Search</h3>
+										<div class="" style="">				
+											{% if user.is_authenticated %}
+											<div class="">
+												<p><a class="cd-dropdown-trigger" href="#0">Browse Profiles</a></p>
+												{% include './allsearch.html' %}
+											</div> <!-- .cd-dropdown-wrapper -->	 
+											{% endif %}				
+									</div>	
+								
+								</div>
+							</a>
+							<a class="" href="{% url 'matches' %}">
+								<div class="col-md-3 w3_soulgrid">
+									<i class="fa fa-users" aria-hidden="true"></i>
+									<h3>Connect</h3>
+									<p>Connect your perfect Match</p>
+									<br>
+								</div>
+							</a>
+							<a class="" href="{% url 'terms' %}">
+								<div class="col-md-3 w3_soulgrid">
+									<i class="fa fa-comments-o" aria-hidden="true"></i>
+									<h3>Interact</h3>
+									<p>Become a member and start Conversation</p>
+								</div>
+							</a>
+							<div class="clearfix"> </div>
+						</div>
+				</div>
+				<a href="/accounts/password_change/" style="color: #e5da45; float: left"> Want to change password? <button style="color:black">change pwd</button></a>
+				{% if user.is_anonymous %}
+				<a href="/accounts/password_reset/"  style="color: #e5da45; float: right"> Forgot pwd? <button style="color:black">reset pwd</button></a>
+				{% endif %}
+			
+				<!-- //Find your soulmate -->
+			</div>
+			<div>		
+				<!-- featured profiles -->			
+				<div class="w3layouts_featured-profiles">
+					<div class="container">
+					<!-- slider -->
+					<div class="agile_featured-profiles">
+						<h2>Featured Profiles</h2>
+								<ul id="flexiselDemo3">
+									<li>
+										<div class="col-md-3 biseller-column">
+											<a href="groom_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p1.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="groom_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p2.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="bride_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p3.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="groom_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p4.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="bride_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p5.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="bride_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p6.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="groom_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p7.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="bride_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p8.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+									</li>
+									<li>
+										<div class="col-md-3 biseller-column">
+											<a href="groom_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p9.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="groom_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p10.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="groom_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p11.jpg'%}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="bride_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p12.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="groom_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p7.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="bride_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p5.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="groom_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p1.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-md-3 biseller-column">
+											<a href="groom_profile.html">
+												<div class="profile-image">
+													<img src="{% static 'images/p2.jpg' %}" class="img-responsive" alt="profile image">
+													<div class="agile-overlay">
+													<h4>Profile ID: 458645</h4>
+														<ul>
+															<li><span>Age / Height</span>: 26 / 5'0''</li>
+															<li><span>Caste</span>: Ipsum</li>
+															<li><span>Religion</span>: Lorem</li>
+															<li><span>Profession</span>: IT Software</li>
+															<li><span>Profile Created By</span>: Self</li>
+															<li><span>Location</span>: Semrd, 7th c, Los</li>
+														</ul>
+													</div>
+												</div>
+											</a>
+										</div>
+									</li>
+								</ul>
+						</div>   
+				</div>
+				<!-- //slider -->				
+				</div>
+				<script type="text/javascript" src="{% static 'js/jquery.flexisel.js' %}"></script><!-- flexisel-js -->	
+						<script type="text/javascript">
+							$(window).load(function() {
+								$("#flexiselDemo3").flexisel({
+									visibleItems:1,
+									animationSpeed: 1000,
+									autoPlay: false,
+									autoPlaySpeed: 5000,    		
+									pauseOnHover: true,
+									enableResponsiveBreakpoints: true,
+									responsiveBreakpoints: { 
+										portrait: { 
+											changePoint:480,
+											visibleItems:1
+										}, 
+										landscape: { 
+											changePoint:640,
+											visibleItems:1
+										},
+										tablet: { 
+											changePoint:768,
+											visibleItems:1
+										}
+									}
+								});
+								
+							});
+						</script>
+				<!-- //featured profiles -->		   
+						
+				<!-- mobile-app -->
+						<div class="wthree-mobilaapp main-grid-border">
+							<div class="container">
+								<div class="app">
+									<div class="col-md-6 w3ls_app-left mpl">
+										<h3>Matrimonial mobile app on your smartphone!</h3>
+										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+										<div class="agileits_app-devices">
+											<h5>Download the App</h5>
+											<a href="https://www.play.google.com/store/"><img src="{% static 'images/1.png' %}" alt=""></a>
+											<a href="https://play.google.com/store/apps/"><img src="{% static 'images/2.png' %}" alt=""></a>
+											<div class="clearfix"> </div>
+										</div>
+									</div>
+									<div class="col-md-offset-1 col-md-5 app-image">
+										<img src="{% static 'images/mob.png' %}" alt="">
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+						<!-- /mobile-app -->
+				
+						{% include './browse_profiles.html' %}
+				
+				<!-- Assisted Service -->
+				<div class="agile-assisted-service text-center">
+					<h4>Assisted Service</h4>
+					<p>Our Relationship Managers have helped thousands of members find their life partners.</p>
+					<a href="{% url 'assisted_services' %}">Know More</a>
+				</div>
+				<!-- //Assisted Service -->			
+				<!-- Location -->
+				<div class="location w3layouts">
+					<div class="container">
+						<div class="col-md-6 col-sm-6 w3layouts location-grids location-grids-1">
+							<h3>Where We Are</h3>
+							<h5>Our Branches</h5>
+							<p>250+ branches across World, Largest Network of its Kind. Click on Map --- </p>
+						</div>
+						<div class="col-md-6 col-sm-6 w3layouts location-grids location-grids-2">
+							<a href="/contact"><img src="{% static 'images/location.jpg' %}" class="img-responsive" alt="Agileits W3layouts" /></a>
+						</div>
+						<div class="clearfix"></div>			
+					</div>
+				</div>
+				<!-- //Location -->		
+				{% if user.is_authenticated %}	
+				<!-- Get started -->
+				<div class="w3layous-story text-center">
+					<div class="container">
+						<h4>Your story is waiting to happen!  <a class="scroll" href="#home">Get started</a></h4>
+					</div>
+				</div>
+				<!-- //Get started -->
+				{% endif %}
+			</div>	
+		</div>	
+	</div>
+	{% endblock content %}
+
+
+	{% include './footer.html'%}

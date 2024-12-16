@@ -1,0 +1,120 @@
+﻿{% extends './index.html' %}
+{% load static %} 
+{% load templatetags %}
+{% block content %}
+
+
+<!-- inner banner -->	
+<div class="w3layouts-inner-banner">
+	<div class="container">
+		<div class="logo">
+			<h1><a class="cd-logo link link--takiri" 
+				href="index.html">City Match (abridged) 
+				<span><i class="fa fa-heart" aria-hidden="true"></i>Made in heaven.</span></a>
+			</h1>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<!-- //inner banner -->	
+
+<!-- breadcrumbs -->
+<div class="w3layouts-breadcrumbs text-center">
+	<div class="container">
+		<span class="w3layouts-breadcrumbs">
+			<a href="index.html">Home</a>
+			 <span>City here</span>
+		</span>
+		<span class="agile-breadcrumbs" 
+			style="float: right; margin-right: 25px"> Welcome <span>{{user}}</span>
+		</span>
+	</div>
+</div>
+<!-- //breadcrumbs -->
+
+
+
+<div class="container" 
+	style="border: dotted red; background-color: orange;">
+	<!-- List of brides and grooms -->
+	<div class="row">
+		<div class="col-md-3" style="background-color: cyan; border: dotted red; ">				
+			{% if user.is_authenticated %}
+			<div class="cd-dropdown-wrapper">
+				<h3><a class="cd-dropdown-trigger" 
+					href="#0">Browse Profiles by</a>
+				</h3>
+				{% include './new.html' %}
+			</div> <!-- .cd-dropdown-wrapper -->	 
+			{% endif %}				
+		</div>		
+		<!-- List of brides and grooms -->
+		<div class="col-md-9">
+			<h3 class="text-center" style="margin-top:15px">City Matrimonial Profiles list</h3>
+		</div>		
+	</div>
+
+	<div class="row w3ls-list" 
+		style="background-color:pink;">
+		<div class="col-md-3 w3ls-aside"
+			style="background-color: yellow">
+			<p> old include './w3ls-aside.html' </p>
+		</div>
+
+	<div class="col-md-9 profiles-list-agileits" 
+			style="background-color: skyblue">
+		<div id="parentHorizontalTab">	
+		<!--Horizontal Tab-->
+			<ul class="resp-tabs-list hor_1">
+				<li> {{ profilefor }} </li>
+				<li> for: {{ profile_city }} </li>				
+			</ul>
+		</div>
+			<!--Horizontal Tab-->
+		<div class="resp-tabs-container hor_1">	
+			{% include './horizontal_tab.html' %}
+		</div>
+	</div>
+</div>			
+		<div class="clearfix"></div>
+	</div>
+
+<script src="{% static 'js/easyResponsiveTabs.js'%}"></script>
+	<script type="{% static 'text/javascript' %}">
+		$(document).ready(function () {
+
+			$('#parentHorizontalTab').easyResponsiveTabs({
+				type: 'default', //Types: default, vertical, accordion
+				width: 'auto', //auto or any width like 600px
+				fit: true, // 100% fit in a container
+				closed: 'accordion', // Start closed if in accordion view
+				tabidentify: 'hor_1', // The tab groups identifier
+				activate: function (event) { // Callback function if tab is switched
+					var $tab = $(this);
+					var $info = $('#nested-tabInfo');
+					var $name = $('span', $info);
+		
+					$name.text($tab.text());
+		
+					$info.show();
+				}
+			});
+	 
+		});
+	</script>
+	<!-- /List of brides and grooms-->
+</div>
+
+	<!-- Get started -->
+	<div class="w3layous-story text-center">
+		<div class="container">
+			<h4>Your story is waiting to happen!  
+				<a href="index.html">Get started</a>
+			</h4>
+		</div>
+	</div>	
+	<!-- //Get started -->
+		
+	{% include './browse_profiles.html' %}
+
+{% endblock content %}	

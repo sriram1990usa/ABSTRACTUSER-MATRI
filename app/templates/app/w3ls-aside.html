@@ -1,0 +1,11 @@
+<div style="text-align:center">   
+    <div class="">
+        {% if user.is_authenticated %}
+        <div class="cd-dropdown-wrapper">
+            <a class="cd-dropdown-trigger" href="#0">Browse Profiles by</a>
+             {% include './allsearch.html' %}
+        </div> <!-- .cd-dropdown-wrapper -->	 
+        {% endif %}
+    </div>
+   
+</div>
